@@ -2,9 +2,15 @@ package sg.edu.rp.c346.id19036308.demolistview;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -31,6 +37,30 @@ public class MainActivity extends AppCompatActivity {
         // each row and the food String array together
         aa = new FoodAdapter(this, R.layout.row, food);
         lv.setAdapter(aa);
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+
+//                String listItem = lv.getItemAtPosition(position).toString();
+//                Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+////
+////                Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+//
+//                // Sending value to another activity using intent.
+//                intent.putExtra("key", listItem);
+//                startActivity(intent);
+
+
+                Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+                Food selectedFood = food.get(position);
+
+                intent.putExtra("key", selectedFood.getName());
+                startActivity(intent);
+                Toast.makeText(MainActivity.this, selectedFood.getName() + " Star: " + selectedFood.isStar(), Toast.LENGTH_LONG).show();
+            }
+        });
 
     }
 }
